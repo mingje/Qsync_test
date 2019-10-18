@@ -76,15 +76,17 @@ r = str(current_user)
 <span class="kw">print</span>(r)
 rr = r.split(<span class="str">"\\"</span>)
 ss = rr[<span class="dig">1</span>]
-ss = ss[<span class="dig">0</span>:-<span class="dig">2</span>]
+ss = ss[<span class="dig">0</span>:-<span class="dig">1</span>]
 <span class="kw">print</span>(ss)
 path_user = ss
 dd = <span class="str">"rd /s/q C:\\Users\\"</span> + path_user + <span class="str">"\\@Qsync_test\\"</span>
 <span class="kw">print</span>(dd)
+
 <span class="kw">try</span>:
     os.system(dd)
 <span class="kw">except</span>:
     <span class="kw">pass</span>
+
 <span class="str">"""
 os.system('"rd /s/q C:\Users\User\@Qsync_test"')
 """</span>
