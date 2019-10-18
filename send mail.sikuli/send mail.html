@@ -1,0 +1,120 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>send mail.sikuli</h2> <a href="send mail.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> smtplib
+<span class="kw">from</span> email.mime.multipart <span class="kw">import</span> MIMEMultipart
+<span class="kw">from</span> email.mime.text <span class="kw">import</span> MIMEText
+<span class="kw">from</span> email.mime.application <span class="kw">import</span> MIMEApplication
+
+
+gmail_user = <span class="str">'stevenhsu@qnap.com'</span>
+gmail_password = <span class="str">'Qwer!23456'</span> <span class="cmt"># your gmail password</span>
+gmail_to = [<span class="str">'mingje1104@gmail.com'</span>]
+gmail_cc = [<span class="str">'stevenhsu@qnap.com'</span>]
+COMMASPACE = <span class="str">', '</span>
+ao = <span class="str">"machine 1"</span>
+<span class="cmt">#msg = MIMEText('content')</span>
+msg = MIMEMultipart()
+msg[<span class="str">'Subject'</span>] = <span class="str">'ERROR'</span>
+msg[<span class="str">'From'</span>] = <span class="str">"AT管理員"</span>
+msg[<span class="str">'To'</span>] = COMMASPACE.join(gmail_to)
+msg[<span class="str">'cc'</span>] = COMMASPACE.join(gmail_cc)
+
+
+part = MIMEText(ao + <span class="str">" error"</span>)
+msg.attach(part)
+<span class="str">"""
+#---这是附件部分---
+#xlsx类型附件
+
+current_path = os.getcwd()
+report_title = "testcase.csv"
+testpath = current_path + "/" + report_title
+print(testpath)
+
+attachments = [testpath]
+for file in attachments:
+    part = MIMEApplication(open(file,'rb').read())
+    part.add_header('Content-Disposition', 'attachment', filename=os.path.basename(file))
+    msg.attach(part)
+"""</span>
+
+server = smtplib.SMTP_SSL(<span class="str">'smtp.gmail.com'</span>, <span class="dig">465</span>)
+server.ehlo()
+server.login(gmail_user, gmail_password)
+server.sendmail(gmail_user,gmail_to,msg.as_string())
+server.quit()
+
+<span class="kw">print</span>(<span class="str">'Email sent!'</span>)
+</pre>
+</body>
+</html>

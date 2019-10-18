@@ -1,0 +1,173 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>library_qsync.sikuli</h2> <a href="library_qsync.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> smtplib
+<span class="kw">from</span> email.mime.multipart <span class="kw">import</span> MIMEMultipart
+<span class="kw">from</span> email.mime.text <span class="kw">import</span> MIMEText
+<span class="kw">from</span> email.mime.application <span class="kw">import</span> MIMEApplication
+
+sys_path = sys.path[<span class="dig">0</span>]
+sys_path_split = sys_path.split(<span class="str">"\\"</span>)
+<span class="kw">del</span> sys_path_split[-<span class="dig">1</span>]
+<span class="kw">print</span>(sys_path_split)
+delimiter = <span class="str">"\\"</span>
+picture_path = delimiter.join(sys_path_split) + <span class="str">"\\screenshot\\"</span>
+<span class="kw">print</span>(picture_path)
+
+<span class="kw">def</span> search_path(picture_name):
+    check_path = picture_path + picture_name + <span class="str">"\\"</span>
+    <span class="kw">print</span>(check_path)
+    search_list = os.listdir(check_path)
+    <span class="kw">print</span>(search_list)
+    <span class="kw">for</span> i <span class="kw">in</span> search_list:
+        <span class="kw">print</span>(i)
+        final_path = check_path + i
+        <span class="kw">print</span>(final_path)
+        <span class="kw">if</span> exists(final_path):
+            <span class="kw">print</span>(<span class="str">"Found picture"</span>)
+            flag = final_path
+            <span class="kw">break</span>
+        <span class="kw">else</span>:
+            <span class="kw">print</span>(<span class="str">"Not Found picture"</span>)
+            flag = final_path
+    <span class="kw">return</span> flag
+
+<span class="kw">def</span> nas_detail(**kwargs):
+    nas = {}
+    nas[<span class="str">"lanip"</span>] = kwargs.get(<span class="str">"lanip"</span>)
+    nas[<span class="str">"ac"</span>] = kwargs.get(<span class="str">"ac"</span>)
+    nas[<span class="str">"pwd"</span>] = kwargs.get(<span class="str">"pwd"</span>)
+    <span class="kw">return</span> nas
+
+<span class="kw">def</span> send_mail(test_pc):
+    gmail_user = <span class="str">'stevenhsu@qnap.com'</span>
+    gmail_password = <span class="str">'Qwer!23456'</span> <span class="cmt"># your gmail password</span>
+    gmail_to = [<span class="str">'mingje1104@gmail.com'</span>]
+    gmail_cc = [<span class="str">'stevenhsu@qnap.com'</span>]
+    COMMASPACE = <span class="str">', '</span>
+    <span class="cmt">#msg = MIMEText('content')</span>
+    msg = MIMEMultipart()
+    msg[<span class="str">'Subject'</span>] = <span class="str">'ERROR'</span>
+    msg[<span class="str">'From'</span>] = <span class="str">"AT manager"</span>
+    msg[<span class="str">'To'</span>] = COMMASPACE.join(gmail_to)
+    msg[<span class="str">'cc'</span>] = COMMASPACE.join(gmail_cc)
+    part = MIMEText(test_pc + <span class="str">" error"</span>)
+    msg.attach(part)
+
+    server = smtplib.SMTP_SSL(<span class="str">'smtp.gmail.com'</span>, <span class="dig">465</span>)
+    server.ehlo()
+    server.login(gmail_user, gmail_password)
+    server.sendmail(gmail_user,gmail_to,msg.as_string())
+    server.quit()
+    <span class="kw">print</span>(<span class="str">'Email sent!'</span>)
+
+<span class="kw">def</span> open_qsync():
+    os_bit = os.popen(<span class="str">"echo %PROCESSOR_ARCHITECTURE%"</span>).read()
+    <span class="kw">if</span> <span class="str">"64"</span> <span class="kw">in</span> os_bit:
+        qsync = <span class="str">"C:\Program Files (x86)\QNAP\Qsync\Qsync.exe"</span>
+    <span class="kw">else</span>:
+        qsync = <span class="str">"C:\Program Files\QNAP\Qsync\Qsync.exe"</span>
+    openApp(qsync)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">if</span> <span class="str">"64"</span> <span class="kw">in</span> os_bit:
+        os.system(<span class="str">'"C:\\Program Files (x86)\\QNAP\\Qsync\\Qsync.exe"'</span>)
+    <span class="kw">else</span>:
+        os.system(<span class="str">'"C:\\Program Files\\QNAP\\Qsync\\Qsync.exe"'</span>)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">if</span> exists(Pattern(search_path(<span class="str">"minwindow_icon"</span>)).similar(<span class="dig">0.80</span>)):
+        <span class="skw">click</span>(Pattern(search_path(<span class="str">"minwindow_icon"</span>)).similar(<span class="dig">0.80</span>))
+    <span class="kw">elif</span> exists(Pattern(search_path(<span class="str">"maxwindow_icon"</span>)).similar(<span class="dig">0.70</span>)):
+        <span class="kw">print</span>(<span class="str">"Max Qsync window"</span>)
+    <span class="kw">else</span>:
+        <span class="kw">print</span>(<span class="str">"Max Qsync window failed"</span>)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">if</span> exists(Pattern(search_path(<span class="str">"qsync_logo"</span>)).similar(<span class="dig">0.70</span>)):
+        <span class="kw">print</span>(<span class="str">"Open Qsync success"</span>)
+        flag = <span class="dig">1</span>
+    <span class="kw">else</span>:
+        flag = <span class="dig">0</span>
+    <span class="kw">assert</span> flag == <span class="dig">1</span>, <span class="str">"Open Qsync failed"</span>
+
+<span class="kw">def</span> close_qsync():
+    os.system(<span class="str">"taskkill /f /im Qsync.exe"</span>)
+    <span class="kw">if</span> exists(Pattern(search_path(<span class="str">"qsync_logo"</span>)).similar(<span class="dig">0.70</span>)):
+        flag = <span class="dig">0</span>
+    <span class="kw">else</span>:
+        <span class="kw">print</span>(<span class="str">"Close Qsync success"</span>)
+        flag = <span class="dig">1</span>
+    <span class="kw">assert</span> flag == <span class="dig">1</span>, <span class="str">"Close Qsync failed"</span>
+</pre>
+</body>
+</html>
