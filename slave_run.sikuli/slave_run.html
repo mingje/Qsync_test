@@ -92,14 +92,14 @@ dd = <span class="str">"rd /s/q C:\\Users\\"</span> + path_user + <span class="s
 
 
 <span class="cmt"># login and pair sync folder</span>
+nas_lanip = sys.argv[<span class="dig">1</span>]
+nas_ac = sys.argv[<span class="dig">2</span>]
+nas_pwd = sys.argv[<span class="dig">3</span>]
 <span class="str">"""
-nas_lanip = sys.argv[1]
-nas_ac = sys.argv[2]
-nas_pwd = sys.argv[3]
+nas_lanip = "10.20.241.196"
+nas_ac = "admin"
+nas_pwd = "dqvts453bt3" 
 """</span>
-nas_lanip = <span class="str">"10.20.241.196"</span>
-nas_ac = <span class="str">"admin"</span>
-nas_pwd = <span class="str">"dqvts453bt3"</span>
 target = nas_detail(lanip = nas_lanip, ac = nas_ac, pwd = nas_pwd)
 <span class="kw">print</span>(target)
 

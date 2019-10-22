@@ -20,7 +20,6 @@ except:
 
 
 # login and pair sync folder
-"""
 nas_lanip = sys.argv[1]
 nas_ac = sys.argv[2]
 nas_pwd = sys.argv[3]
@@ -28,6 +27,7 @@ nas_pwd = sys.argv[3]
 nas_lanip = "10.20.241.196"
 nas_ac = "admin"
 nas_pwd = "dqvts453bt3" 
+"""
 target = nas_detail(lanip = nas_lanip, ac = nas_ac, pwd = nas_pwd)
 print(target)
 
