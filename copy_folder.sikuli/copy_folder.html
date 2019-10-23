@@ -82,7 +82,7 @@ r = str(current_user)
 <span class="kw">print</span>(r)
 rr = r.split(<span class="str">"\\"</span>)
 ss = rr[<span class="dig">1</span>]
-ss = ss[<span class="dig">0</span>:<span class="dig">4</span>]
+ss = ss[<span class="dig">0</span>:-<span class="dig">1</span>]
 <span class="kw">print</span>(ss)
 path_user = ss
 copy_path = <span class="str">"dir C:\\Users\\"</span> + path_user + <span class="str">"\\@Qsync_test\\"</span> + week_current

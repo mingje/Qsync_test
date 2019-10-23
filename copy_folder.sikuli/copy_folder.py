@@ -10,7 +10,7 @@ r = str(current_user)
 print(r)
 rr = r.split("\\")
 ss = rr[1]
-ss = ss[0:4]
+ss = ss[0:-1]
 print(ss) 
 path_user = ss
 copy_path = "dir C:\\Users\\" + path_user + "\\@Qsync_test\\" + week_current
