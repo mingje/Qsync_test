@@ -150,7 +150,7 @@ close_qsync()
 
 <span class="cmt"># Open and close Qsync</span>
 x = <span class="dig">1</span>
-<span class="kw">for</span> i <span class="kw">in</span> range(<span class="dig">2</span>):
+<span class="kw">for</span> i <span class="kw">in</span> range(<span class="dig">100</span>):
     <span class="kw">print</span>(<span class="str">"Execute "</span> + str(x) + <span class="str">" Times"</span>)
     open_qsync()
     <span class="skw">wait</span>(<span class="dig">5</span>)
@@ -162,10 +162,11 @@ x = <span class="dig">1</span>
         <span class="kw">print</span>(<span class="str">"Sync failed"</span>)
         send_mail(pc_name)
         <span class="kw">break</span>
-    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">wait</span>(<span class="dig">5</span>)
     close_qsync()
     <span class="skw">wait</span>(<span class="dig">2</span>)
     x = x + <span class="dig">1</span>
+    <span class="skw">wait</span>(<span class="dig">300</span>)
 </pre>
 </body>
 </html>

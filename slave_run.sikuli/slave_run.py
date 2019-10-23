@@ -78,7 +78,7 @@ wait(3)
 
 # Open and close Qsync
 x = 1                         
-for i in range(2):
+for i in range(100):
     print("Execute " + str(x) + " Times")
     open_qsync()
     wait(5)
@@ -90,7 +90,8 @@ for i in range(2):
         print("Sync failed")
         send_mail(pc_name)
         break
-    wait(2)
+    wait(5)
     close_qsync()
     wait(2)
     x = x + 1
+    wait(300)
