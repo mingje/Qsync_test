@@ -81,7 +81,7 @@ x = 1
 for i in range(100):
     print("Execute " + str(x) + " Times")
     open_qsync()
-    wait(5)
+    wait(10)
     if exists(Pattern(search_path("syncdone_icon")).similar(0.70)):
         print("Sync success")
     elif exists(Pattern(search_path("syncing_icon")).similar(0.70)):
@@ -90,8 +90,8 @@ for i in range(100):
         print("Sync failed")
         send_mail(pc_name)
         break
-    wait(5)
+    wait(600)
     close_qsync()
     wait(2)
     x = x + 1
-    wait(300)
+    wait(600)

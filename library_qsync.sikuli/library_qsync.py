@@ -68,19 +68,19 @@ def open_qsync():
     else:
         qsync = "C:\Program Files\QNAP\Qsync\Qsync.exe"
     openApp(qsync)
-    wait(2)
+    wait(5)
     if "64" in os_bit:
         os.system('"C:\\Program Files (x86)\\QNAP\\Qsync\\Qsync.exe"')
     else:
         os.system('"C:\\Program Files\\QNAP\\Qsync\\Qsync.exe"')
-    wait(2)
+    wait(5)
     if exists(Pattern(search_path("minwindow_icon")).similar(0.80)):
         click(Pattern(search_path("minwindow_icon")).similar(0.80))
     elif exists(Pattern(search_path("maxwindow_icon")).similar(0.70)):
         print("Max Qsync window")
     else:
         print("Max Qsync window failed")
-    wait(2)
+    wait(5)
     if exists(Pattern(search_path("qsync_logo")).similar(0.70)):
         print("Open Qsync success")
         flag = 1
