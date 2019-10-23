@@ -85,9 +85,16 @@ ss = rr[<span class="dig">1</span>]
 ss = ss[<span class="dig">0</span>:<span class="dig">4</span>]
 <span class="kw">print</span>(ss)
 path_user = ss
-dd = <span class="str">"XCOPY D:\\qsynctestdata\\"</span> + week_current + <span class="str">" C:\\Users\\"</span> + path_user + <span class="str">"\\@Qsync_test\\"</span> + week_current + <span class="str">"\ /I"</span>
+copy_path = <span class="str">"dir C:\\Users\\"</span> + path_user + <span class="str">"\\@Qsync_test\\"</span> + week_current
+<span class="kw">print</span>(copy_path)
+dd = <span class="str">"XCOPY C:\\PC1_test_files"</span> + <span class="str">" C:\\Users\\"</span> + path_user + <span class="str">"\\@Qsync_test\\"</span> + week_current + <span class="str">"\ /I /E"</span>
 <span class="kw">print</span>(dd)
-os.system(dd)
+<span class="kw">print</span>(os.system(copy_path))
+<span class="kw">if</span> os.system(copy_path) == <span class="dig">1</span>:
+    os.system(dd)
+    <span class="kw">print</span>(<span class="str">"copy folder"</span>)
+<span class="kw">else</span>:
+    <span class="kw">print</span>(<span class="str">"Folder already existed"</span>)
 </pre>
 </body>
 </html>
