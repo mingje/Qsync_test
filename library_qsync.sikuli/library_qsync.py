@@ -62,6 +62,7 @@ def send_mail(test_pc):
     print('Email sent!')
 
 def open_qsync():
+    flag = 0
     for i in range(3):
         os_bit = os.popen("echo %PROCESSOR_ARCHITECTURE%").read()
         if "64" in os_bit: 
@@ -88,7 +89,7 @@ def open_qsync():
             break
         else:
             flag = 0
-        assert flag == 1, "Open Qsync failed"
+    assert flag == 1, "Open Qsync failed"
 
 def close_qsync():
     os.system("taskkill /f /im Qsync.exe")
@@ -98,3 +99,22 @@ def close_qsync():
         print("Close Qsync success")
         flag = 1
     assert flag == 1, "Close Qsync failed"
+
+def remove_nas_profile():
+    click(Pattern(search_path("more_button")).similar(0.70))
+    wait(2)
+    click(Pattern(search_path("removeNAS_option")).similar(0.70))
+    wait(2)
+    click(Pattern(search_path("option_button")).similar(0.70))
+    wait(1)
+    type(Key.DOWN)
+    wait(1)
+    type(Key.ENTER)
+    wait(1)
+    waitVanish((Pattern(search_path("pleasewait_string")).similar(0.70)),120)
+    if exists(Pattern(search_path("host_field")).similar(0.70)):
+        print("Remove NAS success")
+        flag = 1
+    else:
+        flag = 0
+    assert flag == 1, "Remove NAS failed"

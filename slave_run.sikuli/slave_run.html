@@ -73,6 +73,17 @@
 <span class="kw">from</span> sikuli <span class="kw">import</span> *
 <span class="kw">from</span> library_qsync <span class="kw">import</span> *
 
+<span class="cmt"># Remove nas</span>
+close_qsync()
+<span class="skw">wait</span>(<span class="dig">5</span>)
+open_qsync()
+<span class="skw">wait</span>(<span class="dig">2</span>)
+<span class="kw">if</span> exists(Pattern(search_path(<span class="str">"host_field"</span>)).similar(<span class="dig">0.70</span>)):
+    <span class="kw">print</span>(<span class="str">"Already remove nas"</span>)
+<span class="kw">else</span>:
+    remove_nas()
+close_qsync()
+
 <span class="cmt"># delete sync folder</span>
 current_user = os.popen(<span class="str">"whoami"</span>).read()
 <span class="kw">print</span>(current_user)

@@ -73,6 +73,18 @@
 <span class="kw">from</span> sikuli <span class="kw">import</span> *
 <span class="kw">from</span> library_qsync <span class="kw">import</span> *
 
+<span class="cmt"># Remove nas</span>
+close_qsync()
+<span class="skw">wait</span>(<span class="dig">5</span>)
+open_qsync()
+<span class="skw">wait</span>(<span class="dig">2</span>)
+<span class="kw">if</span> exists(Pattern(search_path(<span class="str">"host_field"</span>)).similar(<span class="dig">0.70</span>)):
+    <span class="kw">print</span>(<span class="str">"Already remove nas"</span>)
+<span class="kw">else</span>:
+    remove_nas_profile()
+close_qsync()
+
+
 <span class="cmt"># delete sync folder</span>
 current_user = os.popen(<span class="str">"whoami"</span>).read()
 <span class="kw">print</span>(current_user)
@@ -87,6 +99,15 @@ dd = <span class="str">"rd /s/q C:\\Users\\"</span> + path_user + <span class="s
 <span class="kw">try</span>:
     os.system(dd)
     <span class="kw">print</span>(<span class="str">"Clean up sync folder"</span>)
+<span class="kw">except</span>:
+    <span class="kw">pass</span>
+
+
+<span class="cmt"># delete nas shared folder</span>
+xx = <span class="str">"rd /s/q z:\\"</span>
+<span class="kw">try</span>:
+    os.system(xx)
+    <span class="kw">print</span>(<span class="str">"remove shared folder"</span>)
 <span class="kw">except</span>:
     <span class="kw">pass</span>
 

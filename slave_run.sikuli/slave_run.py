@@ -1,6 +1,17 @@
 from sikuli import *
 from library_qsync import *
 
+# Remove nas
+close_qsync()
+wait(5)
+open_qsync()
+wait(2)
+if exists(Pattern(search_path("host_field")).similar(0.70)):
+    print("Already remove nas")
+else:
+    remove_nas()
+close_qsync()
+
 # delete sync folder
 current_user = os.popen("whoami").read()
 print(current_user)

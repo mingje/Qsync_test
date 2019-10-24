@@ -1,6 +1,18 @@
 from sikuli import *
 from library_qsync import *
 
+# Remove nas
+close_qsync()
+wait(5)
+open_qsync()
+wait(2)
+if exists(Pattern(search_path("host_field")).similar(0.70)):
+    print("Already remove nas")
+else:
+    remove_nas_profile()
+close_qsync()
+
+
 # delete sync folder
 current_user = os.popen("whoami").read()
 print(current_user)
@@ -19,6 +31,15 @@ except:
     pass
 
 
+# delete nas shared folder
+xx = "rd /s/q z:\\"
+try:
+    os.system(xx)
+    print("remove shared folder")
+except:
+    pass
+
+                
 # login and pair sync folder
 nas_lanip = sys.argv[1]
 nas_ac = sys.argv[2]
