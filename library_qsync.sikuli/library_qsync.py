@@ -62,31 +62,33 @@ def send_mail(test_pc):
     print('Email sent!')
 
 def open_qsync():
-    os_bit = os.popen("echo %PROCESSOR_ARCHITECTURE%").read()
-    if "64" in os_bit: 
-        qsync = "C:\Program Files (x86)\QNAP\Qsync\Qsync.exe"
-    else:
-        qsync = "C:\Program Files\QNAP\Qsync\Qsync.exe"
-    openApp(qsync)
-    wait(5)
-    if "64" in os_bit:
-        os.system('"C:\\Program Files (x86)\\QNAP\\Qsync\\Qsync.exe"')
-    else:
-        os.system('"C:\\Program Files\\QNAP\\Qsync\\Qsync.exe"')
-    wait(5)
-    if exists(Pattern(search_path("minwindow_icon")).similar(0.80)):
-        click(Pattern(search_path("minwindow_icon")).similar(0.80))
-    elif exists(Pattern(search_path("maxwindow_icon")).similar(0.70)):
-        print("Max Qsync window")
-    else:
-        print("Max Qsync window failed")
-    wait(5)
-    if exists(Pattern(search_path("qsync_logo")).similar(0.70)):
-        print("Open Qsync success")
-        flag = 1
-    else:
-        flag = 0
-    assert flag == 1, "Open Qsync failed"
+    for i in range(3):
+        os_bit = os.popen("echo %PROCESSOR_ARCHITECTURE%").read()
+        if "64" in os_bit: 
+            qsync = "C:\Program Files (x86)\QNAP\Qsync\Qsync.exe"
+        else:
+            qsync = "C:\Program Files\QNAP\Qsync\Qsync.exe"
+        openApp(qsync)
+        wait(5)
+        if "64" in os_bit:
+            os.system('"C:\\Program Files (x86)\\QNAP\\Qsync\\Qsync.exe"')
+        else:
+            os.system('"C:\\Program Files\\QNAP\\Qsync\\Qsync.exe"')
+        wait(5)
+        if exists(Pattern(search_path("minwindow_icon")).similar(0.80)):
+            click(Pattern(search_path("minwindow_icon")).similar(0.80))
+        elif exists(Pattern(search_path("maxwindow_icon")).similar(0.70)):
+            print("Max Qsync window")
+        else:
+            print("Max Qsync window failed")
+        wait(5)
+        if exists(Pattern(search_path("qsync_logo")).similar(0.70)):
+            print("Open Qsync success")
+            flag = 1
+            break
+        else:
+            flag = 0
+        assert flag == 1, "Open Qsync failed"
 
 def close_qsync():
     os.system("taskkill /f /im Qsync.exe")
