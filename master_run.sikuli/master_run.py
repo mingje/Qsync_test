@@ -92,6 +92,5 @@ wait(1)
 type(Key.ENTER)
 wait(1)
 click(Pattern(search_path("finish_button")).similar(0.70))
-wait(2)
-close_qsync()
 wait(3)
+
