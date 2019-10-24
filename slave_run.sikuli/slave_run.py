@@ -9,7 +9,7 @@ wait(2)
 if exists(Pattern(search_path("host_field")).similar(0.70)):
     print("Already remove nas")
 else:
-    remove_nas()
+    remove_nas_profile()
 close_qsync()
 
 # delete sync folder

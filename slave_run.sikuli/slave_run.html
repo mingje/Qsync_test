@@ -81,7 +81,7 @@ open_qsync()
 <span class="kw">if</span> exists(Pattern(search_path(<span class="str">"host_field"</span>)).similar(<span class="dig">0.70</span>)):
     <span class="kw">print</span>(<span class="str">"Already remove nas"</span>)
 <span class="kw">else</span>:
-    remove_nas()
+    remove_nas_profile()
 close_qsync()
 
 <span class="cmt"># delete sync folder</span>
