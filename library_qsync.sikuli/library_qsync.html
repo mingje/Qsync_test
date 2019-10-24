@@ -143,6 +143,10 @@ picture_path = delimiter.join(sys_path_split) + <span class="str">"\\screenshot\
             qsync = <span class="str">"C:\Program Files\QNAP\Qsync\Qsync.exe"</span>
         openApp(qsync)
         <span class="skw">wait</span>(<span class="dig">5</span>)
+        <span class="kw">if</span> exists(Pattern(search_path(<span class="str">"delete_button"</span>)).similar(<span class="dig">0.70</span>)):
+            <span class="skw">click</span>(Pattern(search_path(<span class="str">"delete_button"</span>)).similar(<span class="dig">0.70</span>))
+        <span class="kw">else</span>:
+            <span class="kw">print</span>(<span class="str">"No warning"</span>)
         <span class="kw">if</span> <span class="str">"64"</span> <span class="kw">in</span> os_bit:
             os.system(<span class="str">'"C:\\Program Files (x86)\\QNAP\\Qsync\\Qsync.exe"'</span>)
         <span class="kw">else</span>:
