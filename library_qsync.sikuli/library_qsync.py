@@ -115,7 +115,7 @@ def remove_nas_profile():
     wait(1)
     type(Key.ENTER)
     wait(1)
-    waitVanish((Pattern(search_path("pleasewait_string")).similar(0.70)),120)
+    waitVanish((Pattern(search_path("pleasewait_string")).similar(0.70)),240)
     if exists(Pattern(search_path("host_field")).similar(0.70)):
         print("Remove NAS success")
         flag = 1
